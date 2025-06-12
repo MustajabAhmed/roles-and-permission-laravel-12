@@ -1,13 +1,16 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Services\{{ name }}Service;
 use App\Http\Requests\{{ name }}Request;
+use Illuminate\Http\Request;
 
 class {{ name }}Controller extends Controller
 {
     protected $service;
+    protected $viewPath = 'admin.{{ lower_name }}';
 
     public function __construct({{ name }}Service $service)
     {
@@ -16,6 +19,50 @@ class {{ name }}Controller extends Controller
 
     public function index()
     {
-        return response()->json($this->service->getAll());
+        $items = $this->service->getAll();
+        return view("{$this->viewPath}.index", compact('items'));
+    }
+
+    public function create()
+    {
+        return view("{$this->viewPath}.create");
+    }
+
+    public function store({{ name }}Request $request)
+    {
+        $validated = $request->validated();
+        $this->service->create($validated);
+
+        return redirect()->route('{{ lower_name }}.index')
+            ->with('success', '{{ name }} created successfully.');
+    }
+
+    public function show($id)
+    {
+        $item = $this->service->getById($id);
+        return view("{$this->viewPath}.show", compact('item'));
+    }
+
+    public function edit($id)
+    {
+        $item = $this->service->getById($id);
+        return view("{$this->viewPath}.edit", compact('item'));
+    }
+
+    public function update({{ name }}Request $request, $id)
+    {
+        $validated = $request->validated();
+        $this->service->update($id, $validated);
+
+        return redirect()->route('{{ lower_name }}.index')
+            ->with('success', '{{ name }} updated successfully.');
+    }
+
+    public function destroy($id)
+    {
+        $this->service->delete($id);
+
+        return redirect()->route('{{ lower_name }}.index')
+            ->with('success', '{{ name }} deleted successfully.');
     }
 }

@@ -5,10 +5,12 @@ namespace App\Repositories;
 use App\Interfaces\{{ name }}RepositoryInterface;
 use App\Models\{{ name }};
 
-class {{ name }}Repository implements {{ name }}RepositoryInterface
+class {{ name }}Repository extends BaseRepository implements {{ name }}RepositoryInterface
 {
-    public function all()
+    public function __construct({{ name }} $model)
     {
-        return {{ name }}::all();
+        parent::__construct($model);
     }
+
+    // You can put any module-specific queries here
 }

@@ -2,7 +2,7 @@
 
 namespace App\Interfaces;
 
-interface {{ name }}RepositoryInterface
+interface {{ name }}RepositoryInterface extends BaseRepositoryInterface
 {
-    public function all();
+    // You can add custom repository methods here if needed
 }
