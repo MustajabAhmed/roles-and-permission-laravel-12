@@ -1,0 +1,21 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Services\{{ name }}Service;
+use App\Http\Requests\{{ name }}Request;
+
+class {{ name }}Controller extends Controller
+{
+    protected $service;
+
+    public function __construct({{ name }}Service $service)
+    {
+        $this->service = $service;
+    }
+
+    public function index()
+    {
+        return response()->json($this->service->getAll());
+    }
+}

@@ -1,0 +1,8 @@
+<?php
+
+namespace App\DTOs;
+
+class {{ name }}DTO
+{
+    // Add your DTO properties here
+}

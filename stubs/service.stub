@@ -1,0 +1,20 @@
+<?php
+
+namespace App\Services;
+
+use App\Repositories\{{ name }}Repository;
+
+class {{ name }}Service
+{
+    protected $repository;
+
+    public function __construct({{ name }}Repository $repository)
+    {
+        $this->repository = $repository;
+    }
+
+    public function getAll()
+    {
+        return $this->repository->all();
+    }
+}
